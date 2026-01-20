@@ -48,6 +48,76 @@
             color: #000;
             border-bottom-color: #007bff;
         }
+
+        /* テーブル */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        th {
+            background-color: #0f3d6e;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #004d61;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+            background-color: white;
+            vertical-align: middle;
+        }
+
+        tbody td:first-child {
+            text-align: right;
+            padding-right: 14px;
+        }
+
+        tbody td:not(:first-child) {
+            text-align: left;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover td {
+            background-color: #eef5ff;
+        }
+
+        tbody td.column-hover {
+            background-color: #eef5ff;
+        }
+
+        thead th.column-hover-header {
+            background-color: #1b4f85;
+        }
+
+        .permission-cell {
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 6px;
+        }
+
+        .permission-cell input {
+            margin: 0;
+        }
+
+        .status-denied {
+            color: #d93025;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -63,6 +133,125 @@
             <div class="tab-item active">役割権限設定</div>
             <div class="tab-item">変更履歴</div>
         </nav>
+
+        <table id="rolePermissionTable">
+            <thead>
+                <tr>
+                    <th>機能</th>
+                    <th>WS権限<br>管理者</th>
+                    <th>本部担当者</th>
+                    <th>支店担当者</th>
+                    <th>支店GF<br>担当者</th>
+                    <th>元請招待<br>作業所担当者</th>
+                    <th>元請招待<br>閲覧者</th>
+                    <th>JV招待</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>作業予定の確認/確認取消</td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>作業予定の確定/確定取消</td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>作業実績の確認/確認取消</td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>作業実績の承認/承認取消</td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>統責者（予定実績）の承認/承認取消</td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox"><span
+                                class="status-denied">不可</span></label></td>
+                </tr>
+                <tr>
+                    <td>元方安全衛生管理者（予定/実績）の承認/承認取消</td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox" checked><span>承認可</span></label>
+                    </td>
+                    <td><label class="permission-cell"><input type="checkbox"><span
+                                class="status-denied">不可</span></label></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <script>
@@ -73,6 +262,71 @@
         document.getElementById('tabPartner')?.addEventListener('click', () => {
             window.location.href = 'index_partner.html';
         });
+
+        const permissionTable = document.getElementById('rolePermissionTable');
+        let activeColIndex = null;
+
+        function syncPermissionLabel(wrapper) {
+            const checkbox = wrapper.querySelector('input[type="checkbox"]');
+            const label = wrapper.querySelector('span');
+            if (!checkbox || !label) return;
+
+            if (checkbox.checked) {
+                label.textContent = '承認可';
+                label.classList.remove('status-denied');
+            } else {
+                label.textContent = '不可';
+                label.classList.add('status-denied');
+            }
+        }
+
+        function syncAllPermissionLabels() {
+            document.querySelectorAll('.permission-cell').forEach((cell) => {
+                syncPermissionLabel(cell);
+            });
+        }
+
+        function clearColumnHighlight() {
+            if (activeColIndex === null || !permissionTable) return;
+            permissionTable.querySelectorAll('tbody tr').forEach((row) => {
+                const cell = row.children[activeColIndex];
+                if (cell) cell.classList.remove('column-hover');
+            });
+            const headerRow = permissionTable.querySelector('thead tr');
+            const headerCell = headerRow?.children[activeColIndex];
+            if (headerCell) headerCell.classList.remove('column-hover-header');
+            activeColIndex = null;
+        }
+
+        permissionTable?.addEventListener('change', (event) => {
+            const target = event.target;
+            if (target instanceof HTMLInputElement && target.type === 'checkbox') {
+                const wrapper = target.closest('.permission-cell');
+                if (wrapper) syncPermissionLabel(wrapper);
+            }
+        });
+
+        permissionTable?.addEventListener('mouseover', (event) => {
+            const cell = event.target.closest('td');
+            if (!cell || !permissionTable.contains(cell)) return;
+            const colIndex = cell.cellIndex;
+            if (colIndex === activeColIndex) return;
+            clearColumnHighlight();
+            activeColIndex = colIndex;
+            const headerRow = permissionTable.querySelector('thead tr');
+            const headerCell = headerRow?.children[colIndex];
+            if (headerCell) headerCell.classList.add('column-hover-header');
+            permissionTable.querySelectorAll('tbody tr').forEach((row) => {
+                const cellInCol = row.children[colIndex];
+                if (cellInCol) cellInCol.classList.add('column-hover');
+            });
+        });
+
+        permissionTable?.addEventListener('mouseleave', () => {
+            clearColumnHighlight();
+        });
+
+        syncAllPermissionLabels();
     </script>
 </body>
 
