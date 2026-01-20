@@ -333,9 +333,13 @@
         /* テーブル */
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             margin-top: 10px;
             border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
         th {
@@ -344,16 +348,25 @@
             color: white;
             padding: 10px;
             text-align: center;
-            border: 1px solid #004d61;
+            border-bottom: 1px solid #004d61;
             font-weight: normal;
             font-weight: bold;
         }
 
         td {
             padding: 10px;
-            border: 1px solid #ccc;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
             background-color: white;
             vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover td {
+            background-color: #eef5ff;
         }
 
         /* 詳細リンク */
