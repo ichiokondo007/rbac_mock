@@ -1,0 +1,17 @@
+# 技術スタック
+
+| カテゴリ        | ツール/ライブラリ    | 備考                                   |
+| :-------------- | :------------------- | :------------------------------------- |
+| Framework       | Next.js (App Router) | デファクトスタンダード                 |
+| Language        | TypeScript           | 必須                                   |
+| Package Manager | pnpm                 | 高速、ディスク節約                     |
+| UI Library      | Tailwind Catalyst    | コピペベースの高品質UI                 |
+| Styling         | Tailwind CSS         | ユーティリティファースト               |
+| Database ORM    | Drizzle ORM          | SQLライクで軽量、Server Actionsと相性◎ |
+| DB (Storage)    | Neon or Supabase     | ※PostgreSQL（Serverless対応が楽）      |
+| Validation      | Zod                  | 型安全な入力チェック                   |
+| Auth            | Clerk                | 爆速でログイン機能を実装               |
+| Component Doc   | Storybook            | AIへの「仕様書」として活用             |
+| Testing         | Vitest               | ロジックの単体テスト用                 |
+| Lint/Format     | Biome                | 設定いらずの高速フォーマッター         |
+| Logging/Error   | Pino / Sentry        | 本番運用の守り神                       |

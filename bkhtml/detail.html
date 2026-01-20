@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>権限変更詳細</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        権限変更
+    </header>
+
+    <div class="container detail-container">
+        <div class="description detail-description">
+            秋葉原 一郎さんの全元請プロジェクトに対しての承認権限変更を行います。<br>
+            プロジェクト単位での権限設定は変更されません。
+        </div>
+
+        <table class="permission-table">
+            <thead>
+                <tr>
+                    <th>承認機能</th>
+                    <th>承認可否</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-func">統括者予定実績の承認機能</td>
+                    <td class="col-radio">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="perm1" checked> 承認可
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="perm1"> 不可
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-func">元方安全衛生管理者の承認機能</td>
+                    <td class="col-radio">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="perm2" checked> 承認可
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="perm2"> 不可
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-func">作業予定の確定</td>
+                    <td class="col-radio">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="perm3" checked> 承認可
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="perm3"> 不可
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-func">作業実績の承認</td>
+                    <td class="col-radio">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="perm4" checked> 承認可
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="perm4"> 不可
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-func">作業予定実績の確認</td>
+                    <td class="col-radio">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="perm5" checked> 承認可
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="perm5"> 不可
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="action-buttons">
+            <button class="btn btn-cancel" onclick="goBack()">キャンセル</button>
+            <button class="btn btn-register" onclick="register()">登録</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // キャンセルボタン（前の画面に戻る）
+        function goBack() {
+            // 実際のブラウザバック挙動
+            // window.history.back(); 
+            alert('前の画面に戻ります');
+        }
+
+        // 登録ボタン
+        function register() {
+            alert('変更内容を登録しました。');
+        }
+    </script>
+</body>
+</html>

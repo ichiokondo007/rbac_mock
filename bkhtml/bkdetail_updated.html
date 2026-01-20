@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>権限変更詳細</title>
+    <style>
+        /* --- index.html と共通のベーススタイル --- */
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* 詳細画面は背景白の印象のため */
+            color: #333;
+            font-size: 14px;
+        }
+
+        /* ヘッダー */
+        header {
+            background-color: #0f3d6e; /* 濃い紺色 */
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* メインコンテナ */
+        .container {
+            padding: 30px;
+            max-width: 900px; /* 読みやすさのため幅を制限 */
+            margin: 0 auto;
+        }
+
+        /* 説明文エリア */
+        .description {
+            margin-bottom: 25px;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* --- テーブルスタイル (詳細画面用カスタム) --- */
+        .permission-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            border: 1px solid #000; /* 外枠は強めに */
+        }
+
+        .permission-table th {
+            background-color: #0f3d6e; /* ヘッダーと同じ紺色 */
+            color: white;
+            padding: 8px 10px;
+            text-align: center;
+            border: 1px solid #fff; /* 白い区切り線 */
+            font-weight: bold;
+        }
+
+        .permission-table td {
+            padding: 10px 15px;
+            border: 1px solid #000; /* 黒い区切り線 */
+            vertical-align: middle;
+        }
+
+        /* 左カラム：右寄せ */
+        .col-func {
+            text-align: right;
+            width: 60%;
+            background-color: #fff;
+        }
+
+        /* 右カラム：左寄せ */
+        .col-radio {
+            text-align: left;
+            width: 40%;
+            background-color: #fff;
+        }
+
+        /* ラジオボタンのレイアウト */
+        .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .radio-label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 15px;
+        }
+        
+        input[type="radio"] {
+            transform: scale(1.2); /* 少し大きく */
+            margin: 0;
+        }
+
+        /* --- アクションボタンエリア --- */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            min-width: 120px;
+            padding: 10px 20px;
+            font-size: 20px; /* ボタン文字大きめ */
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* キャンセルボタン：白背景・黒枠 */
+        .btn-cancel {
+            background-color: #fff;
+            border: 2px solid #333;
+            color: #000;
+        }
+        .btn-cancel:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* 登録ボタン：青背景・白文字 */
+        .btn-register {
+            background-color: #4da6df; /* 画像に近い明るめの青 */
+            border: 2px solid #4da6df;
+            color: #fff;
+        }
+        .btn-register:hover {
+            background-color: #3b8ccb;
+            border-color: #3b8ccb;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        権限変更
+    </header>
+
+    <div class="container">
+        <div class="description">
+            秋葉原 一郎さんの全元請プロジェクトに対しての承認権限変更を行います。<br>
+            プロジェクト単位での権限設定は変更されません。
+        </div>
+
+        <table class="permission-table">
+            <thead>
+                <tr>
+                    <th>承認機能</th>
+                    <th>承認可否</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-func">統括者予定実績の承認機能</td>
+                    <td class="col-radio">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="perm1" checked> 承認可
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="perm1"> 不可
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-func">元方安全衛生管理者の承認機能</td>
+                    <td class="col-radio">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="perm2" checked> 承認可
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="perm2"> 不可
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-func">作業予定の確定</td>
+                    <td class="col-radio">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="perm3" checked> 承認可
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="perm3"> 不可
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-func">作業実績の承認</td>
+                    <td class="col-radio">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="perm4" checked> 承認可
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="perm4"> 不可
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-func">作業予定実績の確認</td>
+                    <td class="col-radio">
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="perm5" checked> 承認可
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="perm5"> 不可
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="action-buttons">
+            <button class="btn btn-cancel" onclick="goBack()">キャンセル</button>
+            <button class="btn btn-register" onclick="register()">登録</button>
+        </div>
+    </div>
+
+    <script>
+        // detail.html は index.html のドロワー（iframe）内で表示される想定
+        // キャンセル/登録で親へ「閉じる」を通知し、index.html 側がドロワーを閉じます。
+
+        function closeSelf(action) {
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({ type: 'detail:close', action: action }, '*');
+                return;
+            }
+            // 単体で開かれている場合のフォールバック
+            window.history.back();
+        }
+
+        // キャンセルボタン
+        function goBack() {
+            closeSelf('cancel');
+        }
+
+        // 登録ボタン（モック：保存後に閉じる）
+        function register() {
+            // alert('変更内容を登録しました。');
+            closeSelf('register');
+        }
+    </script>
+</body>
+</html>

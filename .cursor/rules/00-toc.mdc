@@ -1,0 +1,13 @@
+# 目次
+
+| 目次                    | 内容                                 |
+| :---------------------- | :----------------------------------- |
+| 01-project.mdc          | プロジェクト全体の概要・目的         |
+| 10-tech-stack.mdc       | 技術スタック・依存関係               |
+| 20-architecture.mdc     | アーキテクチャ　ディレクトリ構成     |
+| 30-coding-standards.mdc | コーディング規約（言語横断）         |
+| 40-frontend.mdc         | フロント固有ルール（React/Nextなど） |
+| 50-backend.mdc          | バックエンド固有ルール（API、DB)     |
+| 60-testing.mdc          | テスト方針・テストコード規約         |
+| 70-workflow.mdc         | 開発プロセス　git PR フロー          |
+| 90-meta.mdc             | Cursorへのメタ指示（出力形式など）   |

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>権限設定画面モック</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        ほげほげ権限設定画面
+    </header>
+
+    <div class="container">
+        <nav class="tabs">
+            <div class="tab-item active">元請会社</div>
+            <div class="tab-item">協力会社</div>
+            <div class="tab-item">WS役割権限</div>
+            <div class="tab-item">変更履歴</div>
+        </nav>
+
+        <div class="description">
+            <p>ユーザ単位での承認権限を設定します。<br>
+            プロジェクト選択無の場合はすべての自社元請プロジェクトに適用されます。<br>
+            プロジェクト選択時は選択プロジェクトのみの適用となります。（プロジェクト適用が優先されます）</p>
+        </div>
+
+        <div class="form-area">
+            <div class="form-row">
+                <select class="project-select" required>
+                    <option value="" disabled selected>プロジェクト名 入力してください</option>
+                    <option value="pj0">ほげほげプロジェクト</option>
+                    <option value="pj1">プロジェクトA</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <input type="text" placeholder="ユーザー名">
+                <input type="text" placeholder="ユーザー名カナ">
+            </div>
+
+            <div class="form-row filter-controls">
+                <span class="filter-label">絞り込み</span>
+
+                <div style="position: relative;">
+                    <button id="btnWsPermission" class="pill-button" onclick="toggleDropdown(event)">
+                        WS権限 <span class="arrow">⌄</span>
+                    </button>
+
+                    <div id="wsDropdown" class="dropdown-panel" onclick="event.stopPropagation()">
+                        <div class="dropdown-header">
+                            <span>WS権限 と一致 ⌄</span>
+                            <span>...</span>
+                        </div>
+
+                        <div id="selectedTags" class="selected-tags-area">
+                        </div>
+
+                        <div class="dropdown-list">
+                            <label class="dropdown-item">
+                                <input type="checkbox" class="checkbox-custom" value="本部担当者" data-color="bg-green" onchange="updateTags()">
+                                <span class="badge bg-green">本部担当者</span>
+                            </label>
+
+                            <label class="dropdown-item">
+                                <input type="checkbox" class="checkbox-custom" value="支店担当者" data-color="bg-brown" onchange="updateTags()">
+                                <span class="badge bg-brown">支店担当者</span>
+                            </label>
+
+                            <label class="dropdown-item">
+                                <input type="checkbox" class="checkbox-custom" value="支店GF担当者" data-color="bg-pink" onchange="updateTags()">
+                                <span class="badge bg-pink">支店GF担当者</span>
+                            </label>
+
+                            <label class="dropdown-item">
+                                <input type="checkbox" class="checkbox-custom" value="作業所担当者" data-color="bg-lightgreen" onchange="updateTags()">
+                                <span class="badge bg-lightgreen">作業所担当者</span>
+                            </label>
+
+                            <label class="dropdown-item">
+                                <input type="checkbox" class="checkbox-custom" value="閲覧者" data-color="bg-yellow" onchange="updateTags()">
+                                <span class="badge bg-yellow">閲覧者</span>
+                            </label>
+
+                            <label class="dropdown-item">
+                                <input type="checkbox" class="checkbox-custom" value="一般ユーザー" data-color="bg-blue" onchange="updateTags()">
+                                <span class="badge bg-blue">一般ユーザー</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="pill-button">
+                    部署 <span class="arrow">⌄</span>
+                </button>
+                <button class="pill-button">
+                    所属支店 <span class="arrow">⌄</span>
+                </button>
+
+                <div class="search-actions">
+                    <button class="btn btn-primary">検索</button>
+                    <button class="btn btn-secondary" onclick="clearForm()">検索クリア</button>
+                </div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ユーザ名</th>
+                    <th>WS役割</th>
+                    <th>部署</th>
+                    <th>所属支店</th>
+                    <th>GS権限</th>
+                    <th>詳細</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>秋葉原　一郎</td>
+                    <td>WS権限管理者</td>
+                    <td>あいう</td>
+                    <td>秋葉原支店</td>
+                    <td>企業サブ担当者<br>本部担当者</td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+                <tr>
+                    <td>秋葉原　次郎</td>
+                    <td>本部担当者</td>
+                    <td></td>
+                    <td>本店</td>
+                    <td>本部担当者<br>支店担当者</td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+                <tr>
+                    <td>秋葉原　三郎</td>
+                    <td>支店GF担当者</td>
+                    <td></td>
+                    <td>神奈川支店</td>
+                    <td>支店GF担当者</td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+                <tr>
+                    <td>秋葉原　四郎</td>
+                    <td>支店担当者</td>
+                    <td>かきく</td>
+                    <td>神奈川支店</td>
+                    <td>支店担当者<br>支店GF担当者</td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+                <tr>
+                    <td>秋葉原　四郎</td>
+                    <td>一般担当者</td>
+                    <td></td>
+                    <td>秋葉原支店</td>
+                    <td></td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+                <tr>
+                    <td>秋葉原　六郎</td>
+                    <td>一般担当者</td>
+                    <td></td>
+                    <td>秋葉原支店</td>
+                    <td></td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+                <tr>
+                    <td>秋葉原　七郎</td>
+                    <td>一般担当者</td>
+                    <td>さしす</td>
+                    <td>秋葉原支店</td>
+                    <td></td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

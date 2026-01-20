@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>権限設定画面モック</title>
+    <style>
+        /* ベーススタイル */
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            font-size: 14px;
+        }
+
+        /* ヘッダー */
+        header {
+            background-color: #0f3d6e;
+            /* 濃い紺色 */
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* メインコンテナ */
+        .container {
+            background-color: white;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* タブナビゲーション */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .tab-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #555;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            /* ボーダーの重なり調整 */
+        }
+
+        .tab-item.active {
+            color: #000;
+            border-bottom-color: #007bff;
+            /* アクティブな青 */
+        }
+
+        /* 説明文エリア */
+        .description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-weight: bold;
+        }
+
+        /* フォームエリア */
+        .form-area {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 入力フィールド */
+        input[type="text"],
+        select {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            min-width: 200px;
+        }
+
+        .project-select {
+            width: 400px;
+            background-color: #fff;
+        }
+
+        .project-select option[disabled] {
+            color: #999;
+        }
+
+        .project-select:invalid {
+            color: #999;
+        }
+
+        .project-select option {
+            color: #333;
+        }
+
+        /* 絞り込み・検索エリア */
+        .filter-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .filter-label {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .pill-button {
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+
+        .pill-button:hover {
+            background-color: #e9e9e9;
+        }
+
+        .pill-button.active {
+            border-color: #007bff;
+            background-color: #e7f1ff;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .arrow {
+            font-size: 10px;
+            transition: transform 0.2s;
+        }
+
+        /* ドロップダウンメニュー (WS権限用) */
+        .dropdown-panel {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 320px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 10px;
+            z-index: 100;
+        }
+
+        .dropdown-panel.show {
+            display: block;
+        }
+
+        .dropdown-header {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* 選択タグ表示エリア */
+        .selected-tags-area {
+            border: 2px solid #2e81f4;
+            border-radius: 6px;
+            padding: 5px;
+            min-height: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+            cursor: text;
+        }
+
+        /* 個別のタグスタイル */
+        .tag {
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #333;
+        }
+
+        .tag-remove {
+            cursor: pointer;
+            opacity: 0.6;
+            font-size: 14px;
+        }
+
+        .tag-remove:hover {
+            opacity: 1;
+        }
+
+        /* 色定義 */
+        .bg-green {
+            background-color: #dbeedd;
+            color: #2c5e36;
+        }
+
+        .bg-brown {
+            background-color: #ebdcca;
+            color: #5e3c2c;
+        }
+
+        .bg-pink {
+            background-color: #f5dcdc;
+            color: #6e2c3b;
+        }
+
+        .bg-lightgreen {
+            background-color: #dcf5e6;
+            color: #2c6e46;
+        }
+
+        .bg-yellow {
+            background-color: #f5f1dc;
+            color: #6e652c;
+        }
+
+        .bg-blue {
+            background-color: #dcebf5;
+            color: #2c4a6e;
+        }
+
+        /* リストアイテム */
+        .dropdown-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 6px 4px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .checkbox-custom {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        /* リスト内のバッジ表示 */
+        .badge {
+            font-size: 13px;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* 検索ボタン類 */
+        .search-actions {
+            margin-left: auto;
+            /* 右寄せ */
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: #0091ea;
+            /* 明るい青 */
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            border: 1px solid #ccc;
+            color: #555;
+        }
+
+        /* テーブル */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #0f3d6e;
+            /* 濃い紺色 */
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #004d61;
+            font-weight: normal;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: white;
+            vertical-align: middle;
+        }
+
+        /* 詳細リンク */
+        .detail-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .detail-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           右からスライドインするドロワー（detail.htmlをiframeで表示）
+           ============================================ */
+
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 9999;
+        }
+
+        .drawer-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* 右側パネル（2/3幅） */
+        .drawer-panel {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 66vw;
+            /* 画面の約2/3 */
+            min-width: 360px;
+            max-width: 1000px;
+            /* 大画面時の暴れ防止（好みで調整） */
+            background: #fff;
+            transform: translateX(100%);
+            transition: transform 0.25s ease;
+            box-shadow: -8px 0 24px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .drawer-overlay.show .drawer-panel {
+            transform: translateX(0);
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 10000;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px solid #ccc;
+            background: #fff;
+            cursor: pointer;
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .drawer-frame {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        ほげほげ権限設定画面
+    </header>
+
+    <div class="container">
+        <nav class="tabs">
+            <div class="tab-item active">元請会社</div>
+            <div class="tab-item">協力会社</div>
+            <div class="tab-item">WS役割権限</div>
+            <div class="tab-item">変更履歴</div>
+        </nav>
+
+        <div class="description">
+            <p>ユーザ単位での承認権限を設定します。<br>
+                プロジェクト選択無の場合はすべての自社元請プロジェクトに適用されます。<br>
+                プロジェクト選択時は選択プロジェクトのみの適用となります。（プロジェクト適用が優先されます）</p>
+        </div>
+
+        <div class="form-area">
+            <div class="form-row">
+                <select class="project-select" required>
+                    <option value="" disabled selected>プロジェクト名 入力してください</option>
+                    <option value="pj0">ほげほげプロジェクト</option>
+                    <option value="pj1">プロジェクトA</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <input type="text" placeholder="ユーザー名">
+                <input type="text" placeholder="ユーザー名カナ">
+            </div>
+
+            <div class="form-row filter-controls">
+                <span class="filter-label">絞り込み</span>
+
+                <div style="position: relative;">
+                    <button id="btnWsPermission" class="pill-button" onclick="toggleDropdown(event)">
+                        WS権限 <span class="arrow">⌄</span>
+                    </button>
+
+                    <div id="wsDropdown" class="dropdown-panel" onclick="event.stopPropagation()">
+                        <div class="dropdown-header">
+                            <span>WS権限 と一致 ⌄</span>
+                            <span>...</span>
+                        </div>
+
+                        <div id="selectedTags" class="selected-tags-area">
+                        </div>
+
+                        <div class="dropdown-list">
+                            <label class="dropdown-item">
+                                <input type="checkbox" class="checkbox-custom" value="本部担当者" data-color="bg-green"
+                                    onchange="updateTags()">
+                                <span class="badge bg-green">本部担当者</span>
+                            </label>
+
+                            <label class="dropdown-item">
+                                <input type="checkbox" class="checkbox-custom" value="支店担当者" data-color="bg-brown"
+                                    onchange="updateTags()">
+                                <span class="badge bg-brown">支店担当者</span>
+                            </label>
+
+                            <label class="dropdown-item">
+                                <input type="checkbox" class="checkbox-custom" value="支店GF担当者" data-color="bg-pink"
+                                    onchange="updateTags()">
+                                <span class="badge bg-pink">支店GF担当者</span>
+                            </label>
+
+                            <label class="dropdown-item">
+                                <input type="checkbox" class="checkbox-custom" value="作業所担当者" data-color="bg-lightgreen"
+                                    onchange="updateTags()">
+                                <span class="badge bg-lightgreen">作業所担当者</span>
+                            </label>
+
+                            <label class="dropdown-item">
+                                <input type="checkbox" class="checkbox-custom" value="閲覧者" data-color="bg-yellow"
+                                    onchange="updateTags()">
+                                <span class="badge bg-yellow">閲覧者</span>
+                            </label>
+
+                            <label class="dropdown-item">
+                                <input type="checkbox" class="checkbox-custom" value="一般ユーザー" data-color="bg-blue"
+                                    onchange="updateTags()">
+                                <span class="badge bg-blue">一般ユーザー</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="pill-button">
+                    部署 <span class="arrow">⌄</span>
+                </button>
+                <button class="pill-button">
+                    所属支店 <span class="arrow">⌄</span>
+                </button>
+
+                <div class="search-actions">
+                    <button class="btn btn-primary">検索</button>
+                    <button class="btn btn-secondary" onclick="clearForm()">検索クリア</button>
+                </div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ユーザ名</th>
+                    <th>WS役割</th>
+                    <th>部署</th>
+                    <th>所属支店</th>
+                    <th>GS権限</th>
+                    <th>詳細</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>秋葉原　一郎</td>
+                    <td>WS権限管理者</td>
+                    <td>あいう</td>
+                    <td>秋葉原支店</td>
+                    <td>企業サブ担当者<br>本部担当者</td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+                <tr>
+                    <td>秋葉原　次郎</td>
+                    <td>本部担当者</td>
+                    <td></td>
+                    <td>本店</td>
+                    <td>本部担当者<br>支店担当者</td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+                <tr>
+                    <td>秋葉原　三郎</td>
+                    <td>支店GF担当者</td>
+                    <td></td>
+                    <td>神奈川支店</td>
+                    <td>支店GF担当者</td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+                <tr>
+                    <td>秋葉原　四郎</td>
+                    <td>支店担当者</td>
+                    <td>かきく</td>
+                    <td>神奈川支店</td>
+                    <td>支店担当者<br>支店GF担当者</td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+                <tr>
+                    <td>秋葉原　四郎</td>
+                    <td>一般担当者</td>
+                    <td></td>
+                    <td>秋葉原支店</td>
+                    <td></td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+                <tr>
+                    <td>秋葉原　六郎</td>
+                    <td>一般担当者</td>
+                    <td></td>
+                    <td>秋葉原支店</td>
+                    <td></td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+                <tr>
+                    <td>秋葉原　七郎</td>
+                    <td>一般担当者</td>
+                    <td>さしす</td>
+                    <td>秋葉原支店</td>
+                    <td></td>
+                    <td><a href="#" class="detail-link">詳細&gt;</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // --- ドロップダウンの開閉処理 ---
+        function toggleDropdown(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('wsDropdown');
+            const btn = document.getElementById('btnWsPermission');
+
+            if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none';
+                btn.classList.remove('active');
+            } else {
+                dropdown.style.display = 'block';
+                btn.classList.add('active');
+            }
+        }
+
+        // --- 画面のどこかをクリックしたら閉じる処理 ---
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById('wsDropdown');
+            const btn = document.getElementById('btnWsPermission');
+            if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none';
+                btn.classList.remove('active');
+            }
+        });
+
+        // --- チェックボックス変更時のタグ更新処理 ---
+        function updateTags() {
+            const container = document.getElementById('selectedTags');
+            const checkboxes = document.querySelectorAll('.checkbox-custom');
+
+            container.innerHTML = '';
+
+            checkboxes.forEach(chk => {
+                if (chk.checked) {
+                    const text = chk.value;
+                    const colorClass = chk.getAttribute('data-color');
+
+                    const tag = document.createElement('div');
+                    tag.className = `tag ${colorClass}`;
+                    tag.innerHTML = `
+                        <span>${text}</span>
+                        <span class="tag-remove" onclick="removeTag('${text}')">×</span>
+                    `;
+                    container.appendChild(tag);
+                }
+            });
+        }
+
+        // --- タグのバツボタンで選択解除する処理 ---
+        function removeTag(value) {
+            const checkboxes = document.querySelectorAll('.checkbox-custom');
+            checkboxes.forEach(chk => {
+                if (chk.value === value) {
+                    chk.checked = false;
+                }
+            });
+            updateTags();
+        }
+
+        // --- フォームクリア ---
+        function clearForm() {
+            // プロジェクト選択をリセット
+            document.querySelector('.project-select').selectedIndex = 0;
+            // テキスト入力をクリア
+            document.querySelectorAll('input[type="text"]').forEach(input => {
+                input.value = '';
+            });
+            // チェックボックスをクリア
+            document.querySelectorAll('.checkbox-custom').forEach(chk => {
+                chk.checked = false;
+            });
+            updateTags();
+        }
+    </script>
+
+    <!-- ===== 右からスライドインするドロワー（detail.htmlをiframeで表示）===== -->
+    <div id="detailDrawerOverlay" class="drawer-overlay" aria-hidden="true">
+        <div id="detailDrawer" class="drawer-panel" role="dialog" aria-modal="true" aria-label="権限変更詳細">
+            <button id="detailDrawerClose" class="drawer-close" type="button" aria-label="閉じる">×</button>
+            <iframe id="detailDrawerFrame" class="drawer-frame" src="about:blank" title="権限変更詳細"></iframe>
+        </div>
+    </div>
+
+
+    <script>
+        // ===== ドロワー制御（detail.html を遷移なしで表示）=====
+        const overlayEl = document.getElementById('detailDrawerOverlay');
+        const drawerEl = document.getElementById('detailDrawer');
+        const closeBtn = document.getElementById('detailDrawerClose');
+        const frameEl = document.getElementById('detailDrawerFrame');
+
+        function openDrawer() {
+            frameEl.src = 'detail_updated.html'; // 同じフォルダに置いてください
+            overlayEl.classList.add('show');
+            overlayEl.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            overlayEl.classList.remove('show');
+            overlayEl.setAttribute('aria-hidden', 'true');
+            // フォーム状態を残したいなら次行をコメントアウト
+            frameEl.src = 'about:blank';
+            document.body.style.overflow = '';
+        }
+
+        // 「詳細>」リンクで開く
+        document.querySelectorAll('.detail-link').forEach((a) => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                openDrawer();
+            });
+        });
+
+        // ×で閉じる
+        closeBtn.addEventListener('click', closeDrawer);
+
+        // 背景クリックで閉じる（ドロワー内クリックは無視）
+        overlayEl.addEventListener('click', (e) => {
+            if (e.target === overlayEl) closeDrawer();
+        });
+
+        // ESCで閉じる
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlayEl.classList.contains('show')) {
+                closeDrawer();
+            }
+        });
+
+        // detail → index へ close 通知を受ける
+        window.addEventListener('message', (event) => {
+            const data = event.data;
+            if (!data || typeof data !== 'object') return;
+            if (data.type === 'detail:close') {
+                closeDrawer();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

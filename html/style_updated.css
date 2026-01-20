@@ -1,0 +1,484 @@
+/* ベーススタイル */
+body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 14px;
+}
+
+/* ヘッダー */
+header {
+    background-color: #0f3d6e; /* 濃い紺色 */
+    color: white;
+    padding: 15px 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* メインコンテナ */
+.container {
+    background-color: white;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* タブナビゲーション */
+.tabs {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.tab-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #555;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px; /* ボーダーの重なり調整 */
+}
+
+.tab-item.active {
+    color: #000;
+    border-bottom-color: #007bff; /* アクティブな青 */
+}
+
+/* 説明文エリア */
+.description {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-weight: bold;
+}
+
+/* フォームエリア */
+.form-area {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 入力フィールド */
+input[type="text"], select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    min-width: 200px;
+}
+
+.project-select {
+    width: 400px;
+    background-color: #fff;
+}
+
+.project-select option[disabled] {
+    color: #999;
+}
+
+.project-select:invalid {
+    color: #999;
+}
+
+.project-select option {
+    color: #333;
+}
+
+/* 絞り込み・検索エリア */
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+}
+
+.filter-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.pill-button {
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    position: relative;
+    transition: background-color 0.2s;
+}
+
+.pill-button:hover {
+    background-color: #e9e9e9;
+}
+
+.pill-button.active {
+    border-color: #007bff;
+    background-color: #e7f1ff;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.arrow {
+    font-size: 10px;
+    transition: transform 0.2s;
+}
+
+/* ドロップダウンメニュー (WS権限用) */
+.dropdown-panel {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 320px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 10px;
+    z-index: 100;
+}
+
+.dropdown-panel.show {
+    display: block;
+}
+
+.dropdown-header {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 選択タグ表示エリア */
+.selected-tags-area {
+    border: 2px solid #2e81f4;
+    border-radius: 6px;
+    padding: 5px;
+    min-height: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+    cursor: text;
+}
+
+/* 個別のタグスタイル */
+.tag {
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #333;
+}
+
+.tag-remove {
+    cursor: pointer;
+    opacity: 0.6;
+    font-size: 14px;
+}
+.tag-remove:hover { opacity: 1; }
+
+/* 色定義 */
+.bg-green { background-color: #dbeedd; color: #2c5e36; }
+.bg-brown { background-color: #ebdcca; color: #5e3c2c; }
+.bg-pink  { background-color: #f5dcdc; color: #6e2c3b; }
+.bg-lightgreen { background-color: #dcf5e6; color: #2c6e46; }
+.bg-yellow { background-color: #f5f1dc; color: #6e652c; }
+.bg-blue  { background-color: #dcebf5; color: #2c4a6e; }
+
+/* リストアイテム */
+.dropdown-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.checkbox-custom {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* リスト内のバッジ表示 */
+.badge {
+    font-size: 13px;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* 検索ボタン類 */
+.search-actions {
+    margin-left: auto; /* 右寄せ */
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 20px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: #0091ea; /* 明るい青 */
+    color: white;
+}
+
+.btn-secondary {
+    background-color: white;
+    border: 1px solid #ccc;
+    color: #555;
+}
+
+/* テーブル */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #0f3d6e; /* 濃い紺色 */
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #004d61;
+    font-weight: bold;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    vertical-align: middle;
+}
+
+/* 詳細リンク */
+.detail-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.detail-link:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   詳細画面（detail.html）用スタイル
+   ============================================ */
+
+/* 詳細画面用コンテナ */
+.container.detail-container {
+    padding: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+/* 詳細画面用説明文 */
+.description.detail-description {
+    margin-bottom: 25px;
+    line-height: 1.8;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+/* 詳細画面用テーブル */
+.permission-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    border: 1px solid #000; /* 外枠は強めに */
+}
+
+.permission-table th {
+    background-color: #0f3d6e; /* ヘッダーと同じ紺色 */
+    color: white;
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid #fff; /* 白い区切り線 */
+    font-weight: bold;
+}
+
+.permission-table td {
+    padding: 10px 15px;
+    border: 1px solid #000; /* 黒い区切り線 */
+    vertical-align: middle;
+}
+
+/* 左カラム：右寄せ */
+.col-func {
+    text-align: right;
+    width: 60%;
+    background-color: #fff;
+}
+
+/* 右カラム：左寄せ */
+.col-radio {
+    text-align: left;
+    width: 40%;
+    background-color: #fff;
+}
+
+/* ラジオボタンのレイアウト */
+.radio-group {
+    display: flex;
+    gap: 20px;
+}
+
+.radio-label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
+}
+
+input[type="radio"] {
+    transform: scale(1.2); /* 少し大きく */
+    margin: 0;
+}
+
+/* アクションボタンエリア */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* ボタンの拡張スタイル */
+.btn {
+    min-width: 120px;
+    padding: 10px 20px;
+    font-size: 20px; /* ボタン文字大きめ */
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 4px;
+}
+
+/* キャンセルボタン：白背景・黒枠 */
+.btn-cancel {
+    background-color: #fff;
+    border: 2px solid #333;
+    color: #000;
+}
+
+.btn-cancel:hover {
+    background-color: #f0f0f0;
+}
+
+/* 登録ボタン：青背景・白文字 */
+.btn-register {
+    background-color: #4da6df; /* 画像に近い明るめの青 */
+    border: 2px solid #4da6df;
+    color: #fff;
+}
+
+.btn-register:hover {
+    background-color: #3b8ccb;
+    border-color: #3b8ccb;
+}
+
+
+/* ============================================
+   右からスライドインするドロワー（index.html）
+   - モック用：ライブラリなし
+   ============================================ */
+
+.drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 9999;
+}
+
+.drawer-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 右側パネル（2/3幅） */
+.drawer-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 66vw;          /* 画面の約2/3 */
+    min-width: 360px;
+    max-width: 1000px;    /* 大画面時の暴れ防止（好みで調整） */
+    background: #fff;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+.drawer-overlay.show .drawer-panel {
+    transform: translateX(0);
+}
+
+.drawer-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10000;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.drawer-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #fff;
+}
