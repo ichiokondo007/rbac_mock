@@ -835,8 +835,12 @@
         const closeBtn = document.getElementById('detailDrawerClose');
         const frameEl = document.getElementById('detailDrawerFrame');
 
-        function openDrawer() {
-            frameEl.src = 'detail_updated.html'; // 同じフォルダに置いてください
+        function openDrawer({ mode = 'all', projectName = '' } = {}) {
+            const params = new URLSearchParams({ mode });
+            if (projectName) {
+                params.set('project_name', projectName);
+            }
+            frameEl.src = `detail_updated.html?${params.toString()}`; // 同じフォルダに置いてください
             overlayEl.classList.add('show');
             overlayEl.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
@@ -854,7 +858,17 @@
         document.querySelectorAll('.detail-link').forEach((a) => {
             a.addEventListener('click', (e) => {
                 e.preventDefault();
-                openDrawer();
+                const tableId = a.closest('table')?.id;
+                if (tableId === 'resultTableSingle') {
+                    const projectSelect = document.querySelector('.project-select');
+                    const selectedOption = projectSelect?.selectedOptions?.[0];
+                    const projectName = projectSelect?.value
+                        ? selectedOption?.textContent?.trim()
+                        : '未選択';
+                    openDrawer({ mode: 'single', projectName });
+                    return;
+                }
+                openDrawer({ mode: 'all' });
             });
         });
 
