@@ -11,17 +11,15 @@
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
-            /* 詳細画面は背景白の印象のため */
-            color: #333;
+            background-color: #e5e5df;
+            color: #39444d;
             font-size: 14px;
         }
 
         /* ヘッダー */
         header {
-            background-color: #0f3d6e;
-            /* 濃い紺色 */
-            color: white;
+            background-color: #0f1a2b;
+            color: #e5e5df;
             padding: 15px 20px;
             font-size: 18px;
             font-weight: bold;
@@ -47,25 +45,21 @@
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 40px;
-            border: 1px solid #000;
-            /* 外枠は強めに */
+            border: 1px solid #39444d;
         }
 
         .permission-table th {
-            background-color: #0f3d6e;
-            /* ヘッダーと同じ紺色 */
-            color: white;
+            background-color: #1c2e4a;
+            color: #e5e5df;
             padding: 8px 10px;
             text-align: center;
-            border: 1px solid #fff;
-            /* 白い区切り線 */
+            border: 1px solid #39444d;
             font-weight: bold;
         }
 
         .permission-table td {
             padding: 10px 15px;
-            border: 1px solid #000;
-            /* 黒い区切り線 */
+            border: 1px solid #39444d;
             vertical-align: middle;
         }
 
@@ -113,36 +107,64 @@
 
         .btn {
             min-width: 120px;
-            padding: 10px 20px;
-            font-size: 20px;
-            /* ボタン文字大きめ */
+            padding: 8px 18px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
             text-align: center;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .btn::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            background-color: #39444d;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
         }
 
         /* キャンセルボタン：白背景・黒枠 */
         .btn-cancel {
             background-color: #fff;
-            border: 2px solid #333;
-            color: #000;
+            border: 2px solid #39444d;
+            color: #39444d;
+        }
+
+        .btn-cancel::before {
+            background-color: #39444d;
         }
 
         .btn-cancel:hover {
-            background-color: #f0f0f0;
+            background-color: #39444d;
+            color: #fff;
         }
 
         /* 登録ボタン：青背景・白文字 */
         .btn-register {
-            background-color: #4da6df;
-            /* 画像に近い明るめの青 */
-            border: 2px solid #4da6df;
-            color: #fff;
+            background-color: #fff;
+            border: 2px solid #1b85fb;
+            color: #1b85fb;
+        }
+
+        .btn-register::before {
+            background-color: #1b85fb;
         }
 
         .btn-register:hover {
-            background-color: #3b8ccb;
-            border-color: #3b8ccb;
+            background-color: #1b85fb;
+            border-color: #1b85fb;
+            color: #fff;
         }
     </style>
 </head>

@@ -11,16 +11,15 @@
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: #e5e5df;
+            color: #39444d;
             font-size: 14px;
         }
 
         /* ヘッダー */
         header {
-            background-color: #0f3d6e;
-            /* 濃い紺色 */
-            color: white;
+            background-color: #0F1A2B;
+            color: #e5e5df;
             padding: 15px 20px;
             font-size: 18px;
             font-weight: bold;
@@ -40,9 +39,9 @@
         .status-icon {
             display: inline-block;
             padding: 2px 8px;
-            border: 1px solid #28a745;
+            border: 1px solid #d89941;
             border-radius: 9999px;
-            color: #28a745;
+            color: #d89941;
             font-weight: bold;
             font-size: 12px;
             line-height: 1.2;
@@ -56,7 +55,7 @@
         /* タブナビゲーション */
         .tabs {
             display: flex;
-            border-bottom: 2px solid #ddd;
+            border-bottom: 2px solid #39444d;
             margin-bottom: 20px;
         }
 
@@ -64,16 +63,15 @@
             padding: 10px 20px;
             cursor: pointer;
             font-weight: bold;
-            color: #555;
-            border-bottom: 3px solid transparent;
+            color: #5d5d5d;
+            border-bottom: 2px solid transparent;
             margin-bottom: -2px;
             /* ボーダーの重なり調整 */
         }
 
         .tab-item.active {
-            color: #000;
-            border-bottom-color: #007bff;
-            /* アクティブな青 */
+            color: #07111d;
+            border-bottom-color: #d89941;
         }
 
         /* 説明文エリア */
@@ -103,7 +101,7 @@
         input[type="text"],
         select {
             padding: 8px 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #39444d;
             border-radius: 4px;
             font-size: 14px;
             min-width: 200px;
@@ -123,7 +121,7 @@
         }
 
         .project-select option {
-            color: #333;
+            color: #39444d;
         }
 
         /* 絞り込み・検索エリア */
@@ -142,35 +140,53 @@
         }
 
         .pill-button {
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            padding: 5px 15px;
+            border: 1px solid #39444d;
+            background-color: #e5e5df;
+            padding: 6px 14px;
             border-radius: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             font-size: 13px;
             position: relative;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, box-shadow 0.15s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .pill-button::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 9999px;
+            background-color: #39444d;
         }
 
         .pill-button:hover {
-            background-color: #e9e9e9;
+            background-color: #e5e5df;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
         }
 
         .pill-button.active {
-            border-color: #007bff;
-            background-color: #e7f1ff;
-            color: #007bff;
+            border-color: #d89941;
+            background-color: #e5e5df;
+            color: #d89941;
             font-weight: bold;
         }
 
+        .pill-button.active::before {
+            background-color: #d89941;
+        }
+
         .pill-button.selected {
-            border-color: #28a745;
-            background-color: #eaf6ef;
-            color: #1e7e34;
+            border-color: #d89941;
+            background-color: #e5e5df;
+            color: #d89941;
             font-weight: bold;
+        }
+
+        .pill-button.selected::before {
+            background-color: #d89941;
         }
 
         .arrow {
@@ -186,7 +202,7 @@
             left: 0;
             width: 320px;
             background: white;
-            border: 1px solid #ddd;
+            border: 1px solid #39444d;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             padding: 10px;
@@ -199,7 +215,7 @@
 
         .dropdown-header {
             font-size: 12px;
-            color: #666;
+            color: #5d5d5d;
             margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
@@ -207,7 +223,7 @@
 
         /* 選択タグ表示エリア */
         .selected-tags-area {
-            border: 2px solid #2e81f4;
+            border: 2px solid #d89941;
             border-radius: 6px;
             padding: 5px;
             min-height: 32px;
@@ -311,23 +327,61 @@
         }
 
         .btn {
-            padding: 8px 20px;
-            border-radius: 4px;
-            border: none;
+            padding: 8px 18px;
+            border-radius: 9999px;
+            border: 1px solid transparent;
             cursor: pointer;
             font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            background-color: #39444d;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
         }
 
         .btn-primary {
-            background-color: #0091ea;
-            /* 明るい青 */
-            color: white;
+            background-color: #fff;
+            color: #1b85fb;
+            border-color: #1b85fb;
+        }
+
+        .btn-primary::before {
+            background-color: #1b85fb;
+        }
+
+        .btn-primary:hover {
+            background-color: #1b85fb;
+            color: #fff;
+            border-color: #1b85fb;
         }
 
         .btn-secondary {
-            background-color: white;
-            border: 1px solid #ccc;
-            color: #555;
+            background-color: #fff;
+            border: 1px solid #39444d;
+            color: #39444d;
+        }
+
+        .btn-secondary::before {
+            background-color: #39444d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #39444d;
+            color: #fff;
+            border-color: #39444d;
         }
 
         /* テーブル */
@@ -336,19 +390,18 @@
             border-collapse: separate;
             border-spacing: 0;
             margin-top: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #39444d;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
         th {
-            background-color: #0f3d6e;
-            /* 濃い紺色 */
-            color: white;
+            background-color: #1C2E4A;
+            color: #e5e5df;
             padding: 10px;
             text-align: center;
-            border-bottom: 1px solid #004d61;
+            border-bottom: 1px solid #39444d;
             font-weight: normal;
             font-weight: bold;
         }
@@ -356,7 +409,7 @@
         td {
             padding: 10px;
             text-align: center;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #39444d;
             background-color: white;
             vertical-align: middle;
         }
@@ -366,12 +419,12 @@
         }
 
         tbody tr:hover td {
-            background-color: #eef5ff;
+            background-color: #e5e5df;
         }
 
         /* 詳細リンク */
         .detail-link {
-            color: #007bff;
+            color: #d89941;
             text-decoration: none;
             font-weight: bold;
             cursor: pointer;
@@ -430,11 +483,16 @@
             width: 40px;
             height: 40px;
             border-radius: 999px;
-            border: 1px solid #ccc;
-            background: #fff;
+            border: 1px solid #39444d;
+            background: #e5e5df;
             cursor: pointer;
             font-size: 22px;
             line-height: 1;
+            color: #39444d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
         }
 
         .drawer-frame {
@@ -903,6 +961,32 @@
         document.getElementById('tabRolePermission')?.addEventListener('click', () => {
             window.location.href = 'index_role_permission.html';
         });
+
+        const projectSelect = document.querySelector('.project-select');
+        const projectTypeRadios = document.querySelectorAll('input[name="project-type"]');
+
+        function syncProjectSelect() {
+            if (!projectSelect) return;
+            if (!projectSelect.dataset.originalOptions) {
+                projectSelect.dataset.originalOptions = projectSelect.innerHTML;
+            }
+            const selected = document.querySelector('input[name="project-type"]:checked');
+            const isSingle = selected?.value === 'single';
+
+            if (isSingle) {
+                projectSelect.disabled = false;
+                projectSelect.innerHTML = projectSelect.dataset.originalOptions;
+                projectSelect.selectedIndex = 0;
+            } else {
+                projectSelect.disabled = true;
+                projectSelect.innerHTML = '';
+            }
+        }
+
+        projectTypeRadios.forEach((radio) => {
+            radio.addEventListener('change', syncProjectSelect);
+        });
+        syncProjectSelect();
     </script>
 
 </body>
