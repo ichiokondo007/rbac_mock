@@ -79,6 +79,13 @@
             border-bottom-color: #1b85fb;
         }
 
+        /* 検索条件エリア */
+        .search-area {
+            background-color: #e5e5df;
+            padding: 20px;
+            margin: 0 -20px 20px -20px;
+        }
+
         /* 説明文エリア */
         .description {
             margin-bottom: 20px;
@@ -87,7 +94,7 @@
 
         /* フォームエリア */
         .form-area {
-            margin-bottom: 20px;
+            margin-bottom: 0;
         }
 
         .form-row {
@@ -525,100 +532,102 @@
             <div class="tab-item">変更履歴</div>
         </nav>
 
-        <div class="description">
-            <p>協力会社プロジェクトを対象としたユーザ毎の承認権限設定を行います</p>
-        </div>
-
-        <div class="form-area">
-            <div class="form-row">
-                <label style="display: flex; align-items: center; gap: 5px; margin-right: 15px;">
-                    <input type="radio" name="project-type" value="all" checked>
-                    <span>全協力会社プロジェクト対象</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 5px; margin-right: 15px;">
-                    <input type="radio" name="project-type" value="single">
-                    <span>個別協力会社プロジェクト対象</span>
-                </label>
-                <select class="project-select" required>
-                    <option value="" disabled selected>プロジェクト名 入力してください</option>
-                    <option value="pj0">ほげほげプロジェクト</option>
-                    <option value="pj1">プロジェクトA</option>
-                </select>
+        <div class="search-area">
+            <div class="description">
+                <p>自社ユーザの協力会社プロジェクトに対しての承認権限設定を行います</p>
             </div>
 
-            <div class="form-row">
-                <input type="text" placeholder="ユーザー名">
-                <input type="text" placeholder="ユーザー名カナ">
-            </div>
-
-            <div class="form-row filter-controls">
-                <span class="filter-label">絞り込み</span>
-
-                <div style="position: relative;">
-                    <button id="btnWsPermission" class="pill-button" onclick="toggleDropdown(event)">
-                        WS権限 <span class="arrow">⌄</span>
-                    </button>
-
-                    <div id="wsDropdown" class="dropdown-panel" onclick="event.stopPropagation()">
-                        <div class="dropdown-header">
-                            <span>WS権限 と一致 ⌄</span>
-                            <span>...</span>
-                        </div>
-
-                        <div id="selectedTags" class="selected-tags-area"></div>
-
-                        <div class="dropdown-list">
-                            <label class="dropdown-item">
-                                <input type="checkbox" class="checkbox-custom" value="本部担当者" data-color="bg-green"
-                                    onchange="updateTags()">
-                                <span class="badge bg-green">本部担当者</span>
-                            </label>
-
-                            <label class="dropdown-item">
-                                <input type="checkbox" class="checkbox-custom" value="支店担当者" data-color="bg-brown"
-                                    onchange="updateTags()">
-                                <span class="badge bg-brown">支店担当者</span>
-                            </label>
-
-                            <label class="dropdown-item">
-                                <input type="checkbox" class="checkbox-custom" value="支店GF担当者" data-color="bg-pink"
-                                    onchange="updateTags()">
-                                <span class="badge bg-pink">支店GF担当者</span>
-                            </label>
-
-                            <label class="dropdown-item">
-                                <input type="checkbox" class="checkbox-custom" value="作業所担当者" data-color="bg-lightgreen"
-                                    onchange="updateTags()">
-                                <span class="badge bg-lightgreen">作業所担当者</span>
-                            </label>
-
-                            <label class="dropdown-item">
-                                <input type="checkbox" class="checkbox-custom" value="閲覧者" data-color="bg-yellow"
-                                    onchange="updateTags()">
-                                <span class="badge bg-yellow">閲覧者</span>
-                            </label>
-
-                            <label class="dropdown-item">
-                                <input type="checkbox" class="checkbox-custom" value="一般ユーザー" data-color="bg-blue"
-                                    onchange="updateTags()">
-                                <span class="badge bg-blue">一般ユーザー</span>
-                            </label>
-                        </div>
-                    </div>
+            <div class="form-area">
+                <div class="form-row">
+                    <label style="display: flex; align-items: center; gap: 5px; margin-right: 15px;">
+                        <input type="radio" name="project-type" value="all" checked>
+                        <span>全協力会社プロジェクト対象</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 5px; margin-right: 15px;">
+                        <input type="radio" name="project-type" value="single">
+                        <span>個別協力会社プロジェクト対象</span>
+                    </label>
+                    <select class="project-select" required>
+                        <option value="" disabled selected>プロジェクト名 入力してください</option>
+                        <option value="pj0">ほげほげプロジェクト</option>
+                        <option value="pj1">プロジェクトA</option>
+                    </select>
                 </div>
 
-                <button class="pill-button">
-                    部署 <span class="arrow">⌄</span>
-                </button>
-                <button class="pill-button">
-                    所属支店 <span class="arrow">⌄</span>
-                </button>
-                <button class="pill-button">
-                    番頭/従業員 <span class="arrow">⌄</span>
-                </button>
-                <div class="search-actions">
-                    <button id="searchButton" class="btn btn-primary" type="button">検索</button>
-                    <button class="btn btn-secondary" onclick="clearForm()">検索クリア</button>
+                <div class="form-row">
+                    <input type="text" placeholder="ユーザー名">
+                    <input type="text" placeholder="ユーザー名カナ">
+                </div>
+
+                <div class="form-row filter-controls">
+                    <span class="filter-label">絞り込み</span>
+
+                    <div style="position: relative;">
+                        <button id="btnWsPermission" class="pill-button" onclick="toggleDropdown(event)">
+                            WS権限 <span class="arrow">⌄</span>
+                        </button>
+
+                        <div id="wsDropdown" class="dropdown-panel" onclick="event.stopPropagation()">
+                            <div class="dropdown-header">
+                                <span>WS権限 と一致 ⌄</span>
+                                <span>...</span>
+                            </div>
+
+                            <div id="selectedTags" class="selected-tags-area"></div>
+
+                            <div class="dropdown-list">
+                                <label class="dropdown-item">
+                                    <input type="checkbox" class="checkbox-custom" value="本部担当者" data-color="bg-green"
+                                        onchange="updateTags()">
+                                    <span class="badge bg-green">本部担当者</span>
+                                </label>
+
+                                <label class="dropdown-item">
+                                    <input type="checkbox" class="checkbox-custom" value="支店担当者" data-color="bg-brown"
+                                        onchange="updateTags()">
+                                    <span class="badge bg-brown">支店担当者</span>
+                                </label>
+
+                                <label class="dropdown-item">
+                                    <input type="checkbox" class="checkbox-custom" value="支店GF担当者" data-color="bg-pink"
+                                        onchange="updateTags()">
+                                    <span class="badge bg-pink">支店GF担当者</span>
+                                </label>
+
+                                <label class="dropdown-item">
+                                    <input type="checkbox" class="checkbox-custom" value="作業所担当者"
+                                        data-color="bg-lightgreen" onchange="updateTags()">
+                                    <span class="badge bg-lightgreen">作業所担当者</span>
+                                </label>
+
+                                <label class="dropdown-item">
+                                    <input type="checkbox" class="checkbox-custom" value="閲覧者" data-color="bg-yellow"
+                                        onchange="updateTags()">
+                                    <span class="badge bg-yellow">閲覧者</span>
+                                </label>
+
+                                <label class="dropdown-item">
+                                    <input type="checkbox" class="checkbox-custom" value="一般ユーザー" data-color="bg-blue"
+                                        onchange="updateTags()">
+                                    <span class="badge bg-blue">一般ユーザー</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="pill-button">
+                        部署 <span class="arrow">⌄</span>
+                    </button>
+                    <button class="pill-button">
+                        所属支店 <span class="arrow">⌄</span>
+                    </button>
+                    <button class="pill-button">
+                        番頭/従業員 <span class="arrow">⌄</span>
+                    </button>
+                    <div class="search-actions">
+                        <button id="searchButton" class="btn btn-primary" type="button">検索</button>
+                        <button class="btn btn-secondary" onclick="clearForm()">検索クリア</button>
+                    </div>
                 </div>
             </div>
         </div>
